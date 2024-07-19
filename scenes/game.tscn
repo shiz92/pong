@@ -1,14 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://7jg5pe72x2a0"]
+[gd_scene load_steps=8 format=3 uid="uid://7jg5pe72x2a0"]
 
 [ext_resource type="Texture2D" uid="uid://fx7t4qersd6v" path="res://assets/Board.png" id="1_bu4x1"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="2_8l3vc"]
-[ext_resource type="Texture2D" uid="uid://dgkq4v8ue46f2" path="res://assets/Ball.png" id="2_du31d"]
 [ext_resource type="Texture2D" uid="uid://dc6ux61t6x3py" path="res://assets/Player.png" id="2_kof30"]
 [ext_resource type="Script" path="res://scripts/Player1.gd" id="2_vh2jj"]
-[ext_resource type="Script" path="res://scripts/Ball.gd" id="3_cdha2"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hwxdw"]
-radius = 17.0
+[ext_resource type="PackedScene" uid="uid://bvxwc3iwn4jgn" path="res://scenes/ball.tscn" id="3_ixk4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvg3o"]
 size = Vector2(17.5, 120)
@@ -18,26 +14,24 @@ size = Vector2(897.878, 20)
 
 [node name="game" type="Sprite2D"]
 texture_filter = 1
+position = Vector2(0, -2)
 scale = Vector2(1.00125, 1.0022)
 texture = ExtResource("1_bu4x1")
 centered = false
 script = ExtResource("2_8l3vc")
 player_speed = 500
-ball_speed = 500
+ball_speed = 100
+metadata/_edit_pinned_properties_ = [&"player_speed", &"ball_speed"]
 
-[node name="Ball" type="CharacterBody2D" parent="."]
-position = Vector2(398.502, 217.521)
-script = ExtResource("3_cdha2")
+[node name="Ball" parent="." instance=ExtResource("3_ixk4u")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Ball"]
-texture = ExtResource("2_du31d")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-shape = SubResource("CircleShape2D_hwxdw")
+[node name="Ball2" parent="." instance=ExtResource("3_ixk4u")]
+position = Vector2(382.522, 269.407)
 
 [node name="Player1" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(30, 215)
+motion_mode = 1
 script = ExtResource("2_vh2jj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player1"]
@@ -51,7 +45,9 @@ shape = SubResource("RectangleShape2D_lvg3o")
 unique_name_in_owner = true
 position = Vector2(772.035, 214.528)
 rotation = -3.14075
+motion_mode = 1
 script = ExtResource("2_vh2jj")
+is_cpu = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player2"]
 rotation = 3.14159
