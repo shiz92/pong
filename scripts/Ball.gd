@@ -32,12 +32,17 @@ func _physics_process(delta):
 	#spaguetti code I don't fully understand
 	if collision:
 		collider = collision.get_collider()
-		if collider == %Player1:
-			velocity = velocity.bounce(collision.get_normal())
-			move_and_collide(velocity*delta)
-		elif collider == %Player2:
-			velocity = velocity.bounce(collision.get_normal())
+		if collider == %Player1 or %Player2:
+			velocity -= velocity 
 			move_and_collide(velocity*delta)
 		elif collider == %Borders:
-			velocity = velocity.bounce(collision.get_normal())
+			velocity -= velocity
 			move_and_collide(velocity*delta)
+			#outOfBound()
+		elif collider ==  %WallScore:
+			velocity -= velocity
+			move_and_collide(velocity*delta)
+			#queue_free and respawn the ball after timer 1s
+func outOfBound():
+	# if ball is out of bound (position.x/y) then queue_free and initball()
+	pass
