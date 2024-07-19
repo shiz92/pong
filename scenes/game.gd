@@ -1,3 +1,4 @@
 extends Sprite2D
 
-const PLAYER_SPEED : int = 400
+@export var player_speed : int = 100
+@export var ball_speed : int = 100

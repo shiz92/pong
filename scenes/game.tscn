@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://7jg5pe72x2a0"]
+[gd_scene load_steps=12 format=3 uid="uid://7jg5pe72x2a0"]
 
 [ext_resource type="Texture2D" uid="uid://fx7t4qersd6v" path="res://assets/Board.png" id="1_bu4x1"]
 [ext_resource type="Script" path="res://scenes/game.gd" id="2_8l3vc"]
 [ext_resource type="Texture2D" uid="uid://dgkq4v8ue46f2" path="res://assets/Ball.png" id="2_du31d"]
 [ext_resource type="Texture2D" uid="uid://dc6ux61t6x3py" path="res://assets/Player.png" id="2_kof30"]
 [ext_resource type="Script" path="res://scenes/Player1.gd" id="2_vh2jj"]
+[ext_resource type="Script" path="res://scripts/Ball.gd" id="3_cdha2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hwxdw"]
 radius = 17.0
@@ -27,10 +28,12 @@ scale = Vector2(1.00125, 1.0022)
 texture = ExtResource("1_bu4x1")
 centered = false
 script = ExtResource("2_8l3vc")
-metadata/_edit_vertical_guides_ = [31.0, 769.0]
+player_speed = 500
+ball_speed = 500
 
 [node name="Ball" type="CharacterBody2D" parent="."]
-position = Vector2(399, 200)
+position = Vector2(398.502, 217.521)
+script = ExtResource("3_cdha2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ball"]
 texture = ExtResource("2_du31d")
@@ -38,8 +41,9 @@ texture = ExtResource("2_du31d")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 shape = SubResource("CircleShape2D_hwxdw")
 
-[node name="Player1" type="StaticBody2D" parent="."]
-position = Vector2(31, 215)
+[node name="Player1" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(30, 215)
 script = ExtResource("2_vh2jj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player1"]
@@ -49,9 +53,11 @@ texture = ExtResource("2_kof30")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
 shape = SubResource("RectangleShape2D_lvg3o")
 
-[node name="Player2" type="StaticBody2D" parent="."]
-position = Vector2(769, 215)
-rotation = -3.14159
+[node name="Player2" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(772.035, 214.528)
+rotation = -3.14075
+script = ExtResource("2_vh2jj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player2"]
 rotation = 3.14159
@@ -61,8 +67,7 @@ texture = ExtResource("2_kof30")
 shape = SubResource("RectangleShape2D_lvg3o")
 
 [node name="Borders" type="StaticBody2D" parent="."]
-visible = false
-collision_layer = 2
+unique_name_in_owner = true
 
 [node name="Top" type="CollisionShape2D" parent="Borders"]
 position = Vector2(399, -8)
@@ -73,7 +78,6 @@ position = Vector2(399, 464)
 shape = SubResource("RectangleShape2D_dremu")
 
 [node name="WallLeft" type="Area2D" parent="."]
-visible = false
 position = Vector2(-8, 224)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
@@ -81,7 +85,6 @@ position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_owgjd")
 
 [node name="WallRight" type="Area2D" parent="."]
-visible = false
 position = Vector2(816, 200)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
