@@ -4,6 +4,7 @@ extends CharacterBody2D
 var direction := Vector2()
 var new_direction := Vector2()
 var speed : int
+var motion
 
 func _ready():
 	initialBall()
@@ -11,15 +12,18 @@ func _ready():
 func _physics_process(delta):
 	velocity = Vector2(direction).normalized() * speed
 	
-	var motion = velocity*delta
+	motion = velocity*delta
 	var collision = move_and_collide(motion)
 	while collision:
 		motion = collision.get_remainder()
 		motion = motion.bounce(collision.get_normal())
-		
 		direction = motion.normalized()
-		
 		collision = move_and_collide(motion)
+		print(collision)
+		#if collision.get_collider() == %Scoring:
+			#print("+1Player")
+		#elif collision.get_collider() == %Scoring2:
+			#print("+1CPU")
 	
 	#var collider
 	##spaguetti code I don't fully understand
@@ -49,8 +53,6 @@ func getInitialDirection():
 func initialBall():
 	direction = getInitialDirection()
 	speed = get_parent().ball_speed
-	print(direction)
-	print(speed)
 
 func on_collision():
 	pass
