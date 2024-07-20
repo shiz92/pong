@@ -1,16 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://7jg5pe72x2a0"]
+[gd_scene load_steps=7 format=3 uid="uid://7jg5pe72x2a0"]
 
 [ext_resource type="Texture2D" uid="uid://fx7t4qersd6v" path="res://assets/Board.png" id="1_bu4x1"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="2_8l3vc"]
-[ext_resource type="Texture2D" uid="uid://dc6ux61t6x3py" path="res://assets/Player.png" id="2_kof30"]
-[ext_resource type="Script" path="res://scripts/Player1.gd" id="2_vh2jj"]
 [ext_resource type="PackedScene" uid="uid://bvxwc3iwn4jgn" path="res://scenes/ball.tscn" id="3_ixk4u"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvg3o"]
-size = Vector2(17.5, 120)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dremu"]
-size = Vector2(897.878, 20)
+[ext_resource type="PackedScene" uid="uid://jdrbtwm0g77v" path="res://scenes/paddle.tscn" id="4_17u6k"]
+[ext_resource type="PackedScene" uid="uid://cnexs023xy3tu" path="res://scenes/border.tscn" id="5_sejbe"]
+[ext_resource type="PackedScene" uid="uid://btebueu4qgfhk" path="res://scenes/scoring.tscn" id="6_es6kd"]
 
 [node name="game" type="Sprite2D"]
 texture_filter = 1
@@ -20,62 +15,32 @@ texture = ExtResource("1_bu4x1")
 centered = false
 script = ExtResource("2_8l3vc")
 player_speed = 500
-ball_speed = 100
+ball_speed = 500
 metadata/_edit_pinned_properties_ = [&"player_speed", &"ball_speed"]
 
 [node name="Ball" parent="." instance=ExtResource("3_ixk4u")]
 
-[node name="Ball2" parent="." instance=ExtResource("3_ixk4u")]
-position = Vector2(382.522, 269.407)
+[node name="Paddle" parent="." instance=ExtResource("4_17u6k")]
+position = Vector2(41.9476, 217.521)
 
-[node name="Player1" type="CharacterBody2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(30, 215)
-motion_mode = 1
-script = ExtResource("2_vh2jj")
+[node name="ScoringBorders" type="Node" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Player1"]
-rotation = 3.14159
-texture = ExtResource("2_kof30")
+[node name="Scoring" parent="ScoringBorders" instance=ExtResource("6_es6kd")]
+position = Vector2(-10, 221)
+rotation = -1.5708
+scale = Vector2(1.0022, 1.00125)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
-shape = SubResource("RectangleShape2D_lvg3o")
+[node name="Scoring2" parent="ScoringBorders" instance=ExtResource("6_es6kd")]
+position = Vector2(812, 231)
+rotation = -1.5708
+scale = Vector2(1.0022, 1.00125)
 
-[node name="Player2" type="CharacterBody2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(772.035, 214.528)
-rotation = -3.14075
-motion_mode = 1
-script = ExtResource("2_vh2jj")
-is_cpu = true
+[node name="Borders" type="Node" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Player2"]
-rotation = 3.14159
-texture = ExtResource("2_kof30")
+[node name="Borders" parent="Borders" instance=ExtResource("5_sejbe")]
+position = Vector2(5, 2.38419e-07)
+scale = Vector2(1.00125, 1.0022)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
-shape = SubResource("RectangleShape2D_lvg3o")
-
-[node name="Borders" type="StaticBody2D" parent="."]
-unique_name_in_owner = true
-
-[node name="Top" type="CollisionShape2D" parent="Borders"]
-position = Vector2(405.992, -8)
-shape = SubResource("RectangleShape2D_dremu")
-
-[node name="Bottom" type="CollisionShape2D" parent="Borders"]
-position = Vector2(399, 464)
-shape = SubResource("RectangleShape2D_dremu")
-
-[node name="WallScore" type="StaticBody2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(801.997, -190.581)
-rotation = 1.57079
-
-[node name="Right" type="CollisionShape2D" parent="WallScore"]
-position = Vector2(405.992, -8)
-shape = SubResource("RectangleShape2D_dremu")
-
-[node name="Left" type="CollisionShape2D" parent="WallScore"]
-position = Vector2(405.107, 810.987)
-shape = SubResource("RectangleShape2D_dremu")
+[node name="Borders2" parent="Borders" instance=ExtResource("5_sejbe")]
+position = Vector2(-8, 472)
+scale = Vector2(1.00125, 1.0022)
