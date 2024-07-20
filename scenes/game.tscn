@@ -20,30 +20,38 @@ ball_speed = 500
 metadata/_edit_pinned_properties_ = [&"player_speed", &"ball_speed"]
 
 [node name="Ball" parent="." instance=ExtResource("3_ixk4u")]
+unique_name_in_owner = true
+collision_layer = 3
+collision_mask = 3
 
 [node name="Paddle" parent="." instance=ExtResource("4_17u6k")]
 position = Vector2(41.9476, 217.521)
 
-[node name="ScoringBorders" type="Node" parent="."]
-
-[node name="Scoring" parent="ScoringBorders" instance=ExtResource("6_es6kd")]
-position = Vector2(-10, 221)
-rotation = -1.5708
-scale = Vector2(1.0022, 1.00125)
-
-[node name="Scoring2" parent="ScoringBorders" instance=ExtResource("6_es6kd")]
-position = Vector2(812, 231)
-rotation = -1.5708
-scale = Vector2(1.0022, 1.00125)
-
-[node name="Borders" type="Node" parent="."]
-
-[node name="Borders" parent="Borders" instance=ExtResource("5_sejbe")]
-position = Vector2(5, 2.38419e-07)
-scale = Vector2(1.00125, 1.0022)
-
-[node name="Borders2" parent="Borders" instance=ExtResource("5_sejbe")]
-position = Vector2(-8, 472)
-scale = Vector2(1.00125, 1.0022)
-
 [node name="Control" parent="." instance=ExtResource("7_ls7wo")]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Borders" parent="Node2D" instance=ExtResource("5_sejbe")]
+position = Vector2(4.99376, 1.99561)
+
+[node name="Borders2" parent="Node2D" instance=ExtResource("5_sejbe")]
+position = Vector2(-7.99001, 472.959)
+
+[node name="Node2D2" type="Node2D" parent="."]
+
+[node name="Scoring" parent="Node2D2" instance=ExtResource("6_es6kd")]
+position = Vector2(-9.98752, 222.51)
+rotation = -1.5708
+collision_layer = 2
+collision_mask = 2
+
+[node name="Scoring2" parent="Node2D2" instance=ExtResource("6_es6kd")]
+position = Vector2(810.986, 232.489)
+rotation = -1.5708
+collision_layer = 2
+collision_mask = 2
+
+[connection signal="body_entered" from="Node2D2/Scoring" to="." method="_on_scoring_body_entered"]
+[connection signal="body_entered" from="Node2D2/Scoring" to="Ball" method="_on_scoring_body_entered"]
+[connection signal="body_entered" from="Node2D2/Scoring2" to="." method="_on_scoring_2_body_entered"]
+[connection signal="body_entered" from="Node2D2/Scoring2" to="Ball" method="_on_scoring_2_body_entered"]

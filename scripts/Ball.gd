@@ -5,6 +5,8 @@ var direction := Vector2()
 var new_direction := Vector2()
 var speed : int
 var motion
+var collision
+var score = [0,0]
 
 func _ready():
 	initialBall()
@@ -19,27 +21,6 @@ func _physics_process(delta):
 		motion = motion.bounce(collision.get_normal())
 		direction = motion.normalized()
 		collision = move_and_collide(motion)
-		print(collision)
-		#if collision.get_collider() == %Scoring:
-			#print("+1Player")
-		#elif collision.get_collider() == %Scoring2:
-			#print("+1CPU")
-	
-	#var collider
-	##spaguetti code I don't fully understand
-	#if collision:
-		#collider = collision.get_collider()
-		#if collider == %Player1 or %Player2:
-			#velocity -= velocity 
-			#move_and_collide(velocity*delta)
-		#elif collider == %Borders:
-			#velocity -= velocity
-			#move_and_collide(velocity*delta)
-			##outOfBound()
-		#elif collider ==  %WallScore:
-			#velocity -= velocity
-			#move_and_collide(velocity*delta)
-			##queue_free and respawn the ball after timer 1s
 
 func getInitialDirection():
 	var new_direction := Vector2()
@@ -54,9 +35,10 @@ func initialBall():
 	direction = getInitialDirection()
 	speed = get_parent().ball_speed
 
-func on_collision():
-	pass
+func _on_scoring_body_entered(body):
+	score[0] += 1
+	print(score)
 
-func outOfBound():
-	# if ball is out of bound (position.x/y) then queue_free and initball()
-	pass
+func _on_scoring_2_body_entered(body):
+	score[1] += 1
+	print(score)
