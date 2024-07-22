@@ -11,4 +11,5 @@ func _physics_process(delta):
 		velocity.y -= 1
 	
 	velocity += velocity * get_parent().player_speed
+	print("Player " + str(position.y))
 	move_and_collide(velocity * delta)

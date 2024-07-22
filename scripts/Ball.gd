@@ -20,6 +20,7 @@ func _physics_process(delta):
 		motion = motion.bounce(collision.get_normal())
 		direction = motion.normalized()
 		collision = move_and_collide(motion)
+		speed += 50
 
 func getInitialDirection():
 	new_direction.x = randi_range(1,-1)
