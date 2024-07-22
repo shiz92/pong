@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/scores.gd" id="1_joxsh"]
 
-[node name="UI" type="Control"]
+[node name="Score" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

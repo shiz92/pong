@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://7jg5pe72x2a0"]
+[gd_scene load_steps=8 format=3 uid="uid://7jg5pe72x2a0"]
 
 [ext_resource type="Texture2D" uid="uid://fx7t4qersd6v" path="res://assets/Board.png" id="1_bu4x1"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="2_8l3vc"]
-[ext_resource type="PackedScene" uid="uid://bvxwc3iwn4jgn" path="res://scenes/ball.tscn" id="3_ixk4u"]
 [ext_resource type="PackedScene" uid="uid://jdrbtwm0g77v" path="res://scenes/paddle.tscn" id="4_17u6k"]
 [ext_resource type="PackedScene" uid="uid://cnexs023xy3tu" path="res://scenes/border.tscn" id="5_sejbe"]
 [ext_resource type="PackedScene" uid="uid://btebueu4qgfhk" path="res://scenes/scoring.tscn" id="6_es6kd"]
@@ -20,12 +19,7 @@ player_speed = 500
 ball_speed = 500
 metadata/_edit_pinned_properties_ = [&"player_speed", &"ball_speed"]
 
-[node name="UI" parent="." instance=ExtResource("7_ls7wo")]
-
-[node name="Ball" parent="." instance=ExtResource("3_ixk4u")]
-unique_name_in_owner = true
-collision_layer = 3
-collision_mask = 3
+[node name="Scores" parent="." instance=ExtResource("7_ls7wo")]
 
 [node name="Paddle" parent="." instance=ExtResource("4_17u6k")]
 position = Vector2(41.9476, 217.521)
@@ -52,13 +46,10 @@ position = Vector2(-9.98752, 222.51)
 rotation = -1.5708
 collision_layer = 2
 collision_mask = 2
+isScorePlayer = true
 
 [node name="Scoring2" parent="Node2D2" instance=ExtResource("6_es6kd")]
 position = Vector2(810.986, 232.489)
 rotation = -1.5708
 collision_layer = 2
 collision_mask = 2
-
-[connection signal="body_entered" from="Node2D2/Scoring" to="Ball" method="_on_scoring_body_entered"]
-[connection signal="body_entered" from="Node2D2/Scoring2" to="Ball" method="_on_scoring_2_body_entered"]
-[connection signal="body_entered" from="Node2D2/Scoring2" to="Node2D2/Scoring" method="_on_scoring_2_body_entered"]

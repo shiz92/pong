@@ -12,9 +12,9 @@ func _ready():
 
 func _physics_process(delta):
 	velocity = Vector2(direction).normalized() * speed
-	$"../UI".score()
+	$"../Scores".score()
 	motion = velocity*delta
-	var collision = move_and_collide(motion)
+	collision = move_and_collide(motion)
 	while collision:
 		motion = collision.get_remainder()
 		motion = motion.bounce(collision.get_normal())
@@ -22,7 +22,6 @@ func _physics_process(delta):
 		collision = move_and_collide(motion)
 
 func getInitialDirection():
-	var new_direction := Vector2()
 	new_direction.x = randi_range(1,-1)
 	if new_direction.x == 0:
 		new_direction.x = 0.6
@@ -33,11 +32,3 @@ func getInitialDirection():
 func initialBall():
 	direction = getInitialDirection()
 	speed = get_parent().ball_speed
-
-func _on_scoring_body_entered(body):
-	Global.score[0] += 1
-	print(Global.score)
-
-func _on_scoring_2_body_entered(body):
-	Global.score[1] += 1
-	print(Global.score)
