@@ -2,14 +2,16 @@ extends CharacterBody2D
 
 @export var is_cpu: bool = false
 
+var ball: Ball
+
+const CPU_BEHAVIOR = preload("res://scenes/cpu_behavior.tscn")
+const PLAYER_BEHAVIOR = preload("res://scenes/player_behavior.tscn")
+
+func _ready() -> void:
+	if is_cpu:
+		add_child(CPU_BEHAVIOR.instantiate())
+	else:
+		add_child(PLAYER_BEHAVIOR.instantiate())
 
 func _physics_process(delta):
-	velocity = Vector2(0,0)
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	elif Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	
-	velocity += velocity * get_parent().player_speed
-	print("Player " + str(position.y))
-	move_and_collide(velocity * delta)
+	pass
