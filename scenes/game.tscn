@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://7jg5pe72x2a0"]
+[gd_scene load_steps=7 format=3 uid="uid://7jg5pe72x2a0"]
 
 [ext_resource type="Texture2D" uid="uid://fx7t4qersd6v" path="res://assets/Board.png" id="1_bu4x1"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="2_8l3vc"]
 [ext_resource type="PackedScene" uid="uid://jdrbtwm0g77v" path="res://scenes/paddle.tscn" id="4_17u6k"]
 [ext_resource type="PackedScene" uid="uid://cnexs023xy3tu" path="res://scenes/border.tscn" id="5_sejbe"]
 [ext_resource type="PackedScene" uid="uid://btebueu4qgfhk" path="res://scenes/scoring.tscn" id="6_es6kd"]
-[ext_resource type="Script" path="res://scripts/CPU.gd" id="6_lyqoh"]
 [ext_resource type="PackedScene" uid="uid://bxdxctej11v5s" path="res://scenes/scores.tscn" id="7_ls7wo"]
 
 [node name="game" type="Sprite2D"]
@@ -25,31 +24,33 @@ metadata/_edit_pinned_properties_ = [&"player_speed", &"ball_speed"]
 position = Vector2(41.9476, 217.521)
 
 [node name="Paddle2" parent="." instance=ExtResource("4_17u6k")]
-unique_name_in_owner = false
-position = Vector2(759.051, 217.521)
-rotation = -3.14159
-script = ExtResource("6_lyqoh")
+position = Vector2(763.046, 227.499)
+rotation = 3.14159
+is_cpu = true
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="BorderHolder" type="Node2D" parent="."]
 
-[node name="Borders" parent="Node2D" instance=ExtResource("5_sejbe")]
+[node name="BorderTop" parent="BorderHolder" instance=ExtResource("5_sejbe")]
 position = Vector2(4.99376, 1.99561)
 
-[node name="Borders2" parent="Node2D" instance=ExtResource("5_sejbe")]
+[node name="BorderBottom" parent="BorderHolder" instance=ExtResource("5_sejbe")]
 position = Vector2(-7.99001, 472.959)
 
-[node name="Node2D2" type="Node2D" parent="."]
+[node name="ScoringHolder" type="Node2D" parent="."]
 
-[node name="Scoring" parent="Node2D2" instance=ExtResource("6_es6kd")]
+[node name="ScoringLeft" parent="ScoringHolder" node_paths=PackedStringArray("gameMain") instance=ExtResource("6_es6kd")]
 unique_name_in_owner = false
 position = Vector2(-9.98752, 222.51)
 rotation = -1.5708
 collision_layer = 2
 collision_mask = 2
 isScorePlayer = true
+gameMain = NodePath("../..")
 
-[node name="Scoring2" parent="Node2D2" instance=ExtResource("6_es6kd")]
+[node name="ScoringRight" parent="ScoringHolder" node_paths=PackedStringArray("gameMain") instance=ExtResource("6_es6kd")]
+unique_name_in_owner = false
 position = Vector2(810.986, 232.489)
 rotation = -1.5708
 collision_layer = 2
 collision_mask = 2
+gameMain = NodePath("../..")

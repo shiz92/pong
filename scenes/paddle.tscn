@@ -6,12 +6,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xclab"]
 size = Vector2(120, 18)
 
-[node name="Paddle" type="CharacterBody2D"]
+[node name="Paddle" type="CharacterBody2D" groups=["paddle"]]
 unique_name_in_owner = true
 motion_mode = 1
 script = ExtResource("1_ch8ff")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
 rotation = 3.14159
 texture = ExtResource("2_r3wqe")
 
@@ -19,3 +20,4 @@ texture = ExtResource("2_r3wqe")
 position = Vector2(1.90735e-06, 9.05985e-07)
 rotation = -4.71239
 shape = SubResource("RectangleShape2D_xclab")
+debug_color = Color(0.985108, 0, 0.337035, 0.42)

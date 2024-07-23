@@ -1,17 +1,19 @@
 extends Area2D
 
-@onready var timer = $Timer
 @export var isScorePlayer : bool
-@onready var gameMain = $"../.."
+@export var gameMain: Node
+
+@onready var timer = $Timer
 
 func _on_body_entered(body):
 	if body is Ball:
 		Engine.time_scale = 0.5
+		
 		if isScorePlayer == true:
-			Global.score[0] += 1
+			Global.add_score(1, 1)
 		else:
-			Global.score[1] += 1
-
+			Global.add_score(0, 1)
+		
 		body.queue_free()
 		timer.start()
 

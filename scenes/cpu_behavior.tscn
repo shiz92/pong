@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce8i0e4atsuu1"]
+
+[ext_resource type="Script" path="res://scenes/cpu_behavior.gd" id="1_72ac3"]
+
+[node name="CPUBehavior" type="Node"]
+script = ExtResource("1_72ac3")
